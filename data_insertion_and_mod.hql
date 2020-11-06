@@ -1,6 +1,6 @@
-<---------------------->
-<-- CLICKSTREAM DATA -->
-<---------------------->
+----------------------
+-- CLICKSTREAM DATA --
+----------------------
 
 LOAD DATA LOCAL INPATH '$USER_HOME/project_1/clickstream/clickstream-enwiki-2020-09.tsv' 
 INTO TABLE clickstream_data;
@@ -24,12 +24,12 @@ INSERT INTO TABLE link_percents (
       ON ci.page_title = il.page_title);
 
 
-<------------------->
-<-- PAGEVIEW DATA -->
-<------------------->
+-------------------
+-- PAGEVIEW DATA --
+-------------------
 
-<-- For AU, repeat with 20201019-220000 through 20201020-090000 -->
-<-- NOTE: 20201019-220000 = hour '-2' and -230000 = hour ' -1'  -->
+-- For AU, repeat with 20201019-220000 through 20201020-090000
+-- NOTE: 20201019-220000 = hour '-2' and -230000 = hour ' -1'
 LOAD DATA LOCAL INPATH '$USER_HOME/project_1/pageview/pageviews-20201019-220000'
 INTO TABLE pageview_data;
 
@@ -40,7 +40,7 @@ INSERT INTO TABLE pageviews_au (
 
 TRUNCATE TABLE pageview_data;
 
-<-- For AU and UK, repeat with 20201020-100000 through 20201020-120000 -->
+-- For AU and UK, repeat with 20201020-100000 through 20201020-120000
 LOAD DATA LOCAL INPATH '$USER_HOME/project_1/pageview/pageviews-20201020-100000'
 INTO TABLE pageview_data;
 
@@ -56,7 +56,7 @@ INSERT INTO TABLE pageviews_uk (
 
 TRUNCATE TABLE pageview_data;
 
-<-- For UK, repeat with 20201020-130000 through -140000 -->
+-- For UK, repeat with 20201020-130000 through -140000
 LOAD DATA LOCAL INPATH '$USER_HOME/project_1/pageview/pageviews-20201020-130000'
 INTO TABLE pageview_data;
 
@@ -96,16 +96,18 @@ INSERT INTO TABLE pageviews_us (
 TRUNCATE TABLE pageview_data;
 
 
-<--------------------------->
-<-- REVISION HISTORY DATA -->
-<--------------------------->
+---------------------------
+-- REVISION HISTORY DATA --
+---------------------------
 
 LOAD DATA LOCAL INPATH '$USER_HOME/project_1/rev_history/2020-10.enwiki.2020-10.tsv'
 INTO TABLE revisions;
 
-CREATE TABLE revisioning AS
-SELECT page_title_historical AS title, 
-revision_seconds_to_identity_revert AS revert_time_days
+INSERT INTO TABLE vandalism (
+SELECT page_title_historical, 
+       revision_seconds_to_identity_revert,
+       revision_seconds_to_identity_revert / 60
 FROM revisions
-WHERE revision_is_identity_revert = 'true'
-LIMIT 50;
+WHERE revision_seconds_to_identity_revert > 0
+  AND event_entity = 'revision'
+  AND event_comment LIKE '%vandal%');

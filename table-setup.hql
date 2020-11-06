@@ -1,4 +1,5 @@
-<--     CLICKSTREAM     -->
+--     CLICKSTREAM     --
+
 CREATE TABLE clickstream_data
 (referrer String, request String, link_type String, number int)
 ROW FORMAT DELIMITED
@@ -15,7 +16,7 @@ CREATE TABLE link_percents
 (page_title String, internal_links int, total_traffic int, percentage decimal(10,2))
 
 
-<--     PAGEVIEWS       -->
+--     PAGEVIEWS       --
 
 CREATE TABLE pageviews_data
 (domain_code String, page_title String, count_views int, total_response_size int)
@@ -39,7 +40,7 @@ CREATE TABLE pageviews_totals
 (page_title String, total_views);
 
 
-<--     REVISION HISTORY    -->
+--     REVISION HISTORY    --
 
 CREATE TABLE revisions 
 (wiki_db String, event_entity String, event_type String, event_timestamp String, event_comment String,
@@ -66,3 +67,6 @@ CREATE TABLE revisions
 ROW FORMAT DELIMITED 
 FIELDS TERMINATED BY '\t'
 LINES TERMINATED BY '\n';
+
+CREATE TABLE vandalism
+(page_title String, revert_time_sec bigint, revert_time_min bigint);

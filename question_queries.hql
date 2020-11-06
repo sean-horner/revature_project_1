@@ -1,4 +1,4 @@
-<--     Question 1      -->
+--     Question 1      --
 
 SELECT *
 FROM total_views
@@ -6,7 +6,7 @@ ORDER BY total_views DESC
 LIMIT 20;
 
 
-<--     Question 2      -->
+--     Question 2      --
 
 SELECT *
 FROM link_percents
@@ -16,7 +16,7 @@ ORDER BY percentage DESC
 LIMIT 20;
 
 
-<--     Question 3      -->
+--     Question 3      --
 
 SELECT request, lp.percentage
 FROM clickstream_data
@@ -90,7 +90,7 @@ WHERE referrer = 'Electric_Light_Orchestra'
 ORDER BY lp.percentage DESC
 LIMIT 20;
 
-<--     Question 4      -->
+--     Question 4      --
 
 FROM pageviews_comparison
 WHERE uk_views > us_views
@@ -110,7 +110,37 @@ WHERE au_views > us_views
 ORDER BY au_views DESC
 LIMIT 20;
 
-<--     Question 5      -->
+--     Question 5      --
 
 
-<--     Question 6      -->
+
+
+--     Question 6      --
+
+SELECT *
+FROM pageviews_total
+WHERE page_title = 'Attack_on_Titan'
+   OR page_title = 'Baccano!'
+   OR page_title = 'Cowboy_Bebop'
+   OR page_title = 'Crayon_Shin-chan'
+   OR page_title = 'Death_Note'
+   OR page_title = 'Eden_of_the_East'
+   OR page_title = 'FLCL'
+   OR page_title = 'Ghost_in_the_Shell'
+   OR page_title = 'Mushishi'
+   OR page_title = 'Spice_and_Wolf'
+ORDER BY total_views DESC;
+
+SELECT *
+FROM pageviews_comparison
+WHERE page_title = 'Attack_on_Titan'
+   OR page_title = 'Baccano!'
+   OR page_title = 'Cowboy_Bebop'
+   OR page_title = 'Crayon_Shin-chan'
+   OR page_title = 'Death_Note'
+   OR page_title = 'Eden_of_the_East'
+   OR page_title = 'FLCL'
+   OR page_title = 'Ghost_in_the_Shell'
+   OR page_title = 'Mushishi'
+   OR page_title = 'Spice_and_Wolf'
+ORDER BY page_title;
