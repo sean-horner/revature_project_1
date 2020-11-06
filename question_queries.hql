@@ -112,7 +112,14 @@ LIMIT 20;
 
 --     Question 5      --
 
+SELECT Round(AVG(revert_time_min),2) AS avg_revert_time_min
+FROM vandalism;
 
+SELECT count(page_title) AS total_pages
+FROM pageview_totals;
+
+SELECT sum(total_views) AS gross_views
+FROM pageview_totals;
 
 
 --     Question 6      --
